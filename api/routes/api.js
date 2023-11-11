@@ -26,4 +26,7 @@ router.use("/vehicle", apiVehicle);
 var apiAuthorization = require('./api/authorization/authorization-router');
 router.use("/auth", apiAuthorization);
 
+var apiPrice = require('./api/price/price-router');
+router.use("/price", apiPrice);
+
 module.exports = router;
