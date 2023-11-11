@@ -17,4 +17,7 @@ router.use("/destinations", apiDestinations);
 var apiWarehouse = require('./api/warehouse/warehouse-router');
 router.use("/warehouse", apiWarehouse);
 
+var apiPrice = require('./api/price/price-router');
+router.use("/price", apiPrice);
+
 module.exports = router;
