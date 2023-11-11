@@ -66,9 +66,21 @@ const del = async(req, res) => {
     }
 }
 
+const workerToBranch = async (req, res) => {
+  try {
+    return res.status(200).send({
+      message: "El empleado fue asignado con exito",
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+
 module.exports = {
   getAll,
   create,
   update,
-  del
+  del,
+  workerToBranch
 };

@@ -5,28 +5,26 @@ const BACKEND_URL = process.env.BACKEND_URL;
 const getAll = async (req, res) => {
   try {
     // const response = await axios.get(
-    //   `${BACKEND_URL}/admin/warehouse/all/`
+    //   `${BACKEND_URL}/admin/vehicles/all/`
     //   //   {
     //   //     headers: {
     //   //       Authorization: req.headers.authorization,
     //   //     },
     //   //   }
     // );
+    // return res.status(200).send(response.data);
 
-    console.log("hoal");
     return res.status(200).send({
-      content: [
-        {
-          id: 1,
-          squareMeters: 2,
-          address: "3ra. Calle Zona 3, Quetzaltenango",
-          maxWeightLbs: 300,
-          isEnable: true,
-        },
-      ],
-    });
-
-    return res.status(200).send(response.data);
+        content: [
+            {
+                id: 1,
+                max_weight: 100,
+                plate: "ABCX123",
+                vehicle_type: 1,
+                shipment_id: 1
+            }
+        ]
+    })
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -34,9 +32,8 @@ const getAll = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    console.log('entro al warehose')
     const response = await axios.post(
-      `${BACKEND_URL}/admin/warehouse`,
+      `${BACKEND_URL}/admin/employee`,
       req.body
       // {
       //     headers: {
@@ -44,7 +41,9 @@ const create = async (req, res) => {
       //     }
       // }
     );
-    return res.status(200).send(response.data);
+    return res.status(200).send({
+        message: "El vehiculo se creo con exito"
+    });
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -55,7 +54,7 @@ const update = async (req, res) => {
     console.log(req.params.id);
     console.log(req.body);
     const response = await axios.put(
-      `${BACKEND_URL}/admin/warehouse/${req.params.id}`,
+      `${BACKEND_URL}/admin/employee/${req.params.id}`,
       req.body
       // {
       //     headers: {
@@ -63,7 +62,9 @@ const update = async (req, res) => {
       //     }
       // }
     );
-    return res.status(200).send(response.data);
+    return res.status(200).send({
+        message: "El vehiculo se actualizo con exito"
+    });
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -73,29 +74,24 @@ const del = async (req, res) => {
   try {
     console.log("holiwis");
     const response = await axios.delete(
-      `${BACKEND_URL}/admin/warehouse/${req.params.id}`
+      `${BACKEND_URL}/admin/employee/${req.params.id}`
     );
-    return res.status(200).send(response.data);
+    return res.status(200).send({
+        message: "El vehiculo se elimino con exito"
+    });
   } catch (error) {
     return res.status(500).send(error.message);
   }
 };
 
-const packagesByWarehouse = async (req, res) => {
-
-  try {
-    console.log('me encuentran')
-    return res.status(200).send({
-      content: [
-        {
-          idShipment: 1,
-          date: "01-02-2023",
-        },
-      ],
-    });
-  } catch(error){
-    return res.status(500).send(error.message);
-  }
+const vehicleToBranch = async(req, res) => {
+    try {
+        return res.status(200).send({
+            message: "El vehiculo fue asignado con exito"
+        })
+    } catch(error) {
+        return res.status(500).send(error.message);
+    }
 }
 
 module.exports = {
@@ -103,5 +99,5 @@ module.exports = {
   create,
   update,
   del,
-  packagesByWarehouse
+  vehicleToBranch
 };
